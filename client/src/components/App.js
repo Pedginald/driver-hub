@@ -4,10 +4,10 @@ import MainHub from './MainHub';
 
 const App = () => {
 	return (
-		<div>
+		<>
 			<Header />
 			<MainHub />
-		</div>
+		</>
 	)
 };
 
