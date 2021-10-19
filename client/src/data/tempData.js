@@ -4,19 +4,19 @@ export const orders = [
 ];
 
 export const driverDetails = {
-	'drv1': {
+	drv1: {
 		name: "Steve Williams",
 		orders: [
 			{ orderId: 'ord2', description: 'Wawa to Sudbury', revenue: '1300.00', cost: '70.00' }
 		]
 	},
-	'drv2': {
+	drv2: {
 		name: 'Chris Horton',
 		orders: [
 			{ orderId: 'ord3', description: 'Chicago to Hamilton', revenue: '1500.00', cost: '95.00' }
 		]
 	},
-	'drv3': {
+	drv3: {
 		name: 'Alex Novak',
 		orders: []
 	}
