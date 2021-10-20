@@ -18,7 +18,11 @@ const UnassignedOrders = ({ columnId }) => {
 						>
 							{unassignedOrders.map((order, index) => {
 								return (
-									<OrderCard key={order.orderId} orderDetails={order} index={index}/>
+									<OrderCard 
+										key={order.orderId} 
+										orderDetails={order} 
+										index={index}
+									/>
 								);
 							})}
 							{provided.placeholder}
