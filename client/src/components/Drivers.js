@@ -8,10 +8,14 @@ const Drivers = () => {
 	return (
 		<div className='col border'>
 			<h2 className='text-center'>Drivers</h2>
-			{Object.entries(drivers).map(([id, driver]) => {
-				console.log(id, driver);
+			{Object.entries(drivers).map(([driverId, driver]) => {
+				console.log(driverId, driver);
 				return (
-					<DriverCard key={id} driverId={id} driverDetails={driver}/>
+					<DriverCard 
+						key={driverId} 
+						driverId={driverId} 
+						driverDetails={driver}
+					/>
 				);
 			})}
 		</div>
