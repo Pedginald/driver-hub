@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-import { driverDetails } from '../data/tempData';
-import { Draggable, Droppable } from 'react-beautiful-dnd';
+import { driverDB } from '../data/tempData';
 import DriverCard from '../cards/DriverCard';
 
 const Drivers = () => {
-	const [drivers, setDrivers] = useState(driverDetails);
+	const [drivers, setDrivers] = useState(driverDB);
 
 	return (
 		<div className='col border'>
@@ -12,36 +11,7 @@ const Drivers = () => {
 			{Object.entries(drivers).map(([id, driver]) => {
 				console.log(id, driver);
 				return (
-					<Droppable droppableId={id} key={id}>
-						{(provided, snapshot) => {
-							return (
-								<div
-									ref={provided.innerRef}
-									{...provided.droppableProps}
-								>
-									{driver.name}
-									{driver.orders.map((order, index) => {
-										return (
-											<Draggable draggableId={order.orderId} key={order.orderId} index={index}>
-												{(provided, snapshot) => {
-													return (
-														<div
-															ref={provided.innerRef}
-															{...provided.draggableProps}
-															{...provided.dragHandleProps}
-														>
-															<p>{order.description}</p>
-														</div>
-													);
-												}}
-											</Draggable>
-										);
-									})}
-									{provided.placeholder}
-								</div>
-							);
-						}}
-					</Droppable>
+					<DriverCard key={id} driverId={id} driverDetails={driver}/>
 				);
 			})}
 		</div>
