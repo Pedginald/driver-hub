@@ -16,7 +16,11 @@ const DriverCard = ({ driverId, driverDetails }) => {
 						{name}
 						{orders.map((order, index) => {
 							return (
-								<OrderCard key={order.orderId} orderDetails={order} index={index}/>
+								<OrderCard 
+									key={order.orderId} 
+									orderDetails={order} 
+									index={index}
+								/>
 							);
 						})}
 						{provided.placeholder}
