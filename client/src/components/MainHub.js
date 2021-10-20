@@ -12,8 +12,8 @@ const MainHub = () => {
 		<div className='container-fluid mt-4'>
 			<div className='row'>
 				<DragDropContext onDragEnd={onDragEnd}>
-					<UnassignedOrders id='unassignedOrders'/>
-					<Drivers id='drivers'/>
+					<UnassignedOrders columnId='unassignedOrders'/>
+					<Drivers columnId='drivers'/>
 				</DragDropContext>
 			</div>
 		</div>
