@@ -3,7 +3,7 @@ export const orders = [
 	{ orderId: 'ord4', description: 'Milton to Oakville', revenue: '60.00', cost: '100.50' }
 ];
 
-export const driverDetails = {
+export const driverDB = {
 	drv1: {
 		name: "Steve Williams",
 		orders: [
