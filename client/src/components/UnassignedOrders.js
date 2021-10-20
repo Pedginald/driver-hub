@@ -3,13 +3,13 @@ import { orders } from '../data/tempData';
 import { Droppable } from 'react-beautiful-dnd';
 import OrderCard from '../cards/OrderCard';
 
-const UnassignedOrders = ({ id }) => {
+const UnassignedOrders = ({ columnId }) => {
 	const [unassignedOrders, setUnassignedOrders] = useState(orders);
 
 	return (
 		<div className='col'>
 			<h2>Unassigned orders</h2>
-			<Droppable droppableId={id}>
+			<Droppable droppableId={columnId}>
 				{(provided, snapshot) => {
 					return (
 						<div
