@@ -1,26 +1,26 @@
-import React, { useState } from 'react';
-import { orders } from '../data/tempData';
+import React from 'react';
 import { Droppable } from 'react-beautiful-dnd';
 import OrderCard from '../cards/OrderCard';
 
-const UnassignedOrders = ({ columnId }) => {
-	const [unassignedOrders, setUnassignedOrders] = useState(orders);
+const UnassignedOrders = ({ contents, allOrders }) => {
+	const { orderIds } = contents;
 
 	return (
 		<div className='col'>
 			<h2>Unassigned orders</h2>
-			<Droppable droppableId={columnId}>
+			<Droppable droppableId='unassignedOrderTable'>
 				{(provided, snapshot) => {
 					return (
 						<div
 							{...provided.droppableProps}
 							ref={provided.innerRef}
 						>
-							{unassignedOrders.map((order, index) => {
+							{orderIds.map((orderId, index) => {
+								const orderDetails = allOrders[orderId];
 								return (
 									<OrderCard 
-										key={order.orderId} 
-										orderDetails={order} 
+										key={orderId}
+										orderDetails={orderDetails} 
 										index={index}
 									/>
 								);
