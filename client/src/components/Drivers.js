@@ -1,20 +1,19 @@
-import React, { useState } from 'react';
-import { driverDB } from '../data/tempData';
+import React from 'react';
 import DriverCard from '../cards/DriverCard';
 
-const Drivers = () => {
-	const [drivers, setDrivers] = useState(driverDB);
+const Drivers = ({ drivers, allOrders }) => {
+	//const 
 
 	return (
 		<div className='col border'>
 			<h2 className='text-center'>Drivers</h2>
 			{Object.entries(drivers).map(([driverId, driver]) => {
-				console.log(driverId, driver);
 				return (
 					<DriverCard 
 						key={driverId} 
 						driverId={driverId} 
-						driverDetails={driver}
+						contents={driver}
+						allOrders={allOrders}
 					/>
 				);
 			})}
