@@ -2,8 +2,8 @@ import React from 'react';
 import { Droppable } from 'react-beautiful-dnd';
 import OrderCard from '../cards/OrderCard';
 
-const UnassignedOrders = ({ contents, allOrders }) => {
-	const { orderIds } = contents;
+const UnassignedOrders = ({ orderList, allOrders }) => {
+	const { orderIds } = orderList;
 
 	return (
 		<div className='col'>
@@ -18,7 +18,7 @@ const UnassignedOrders = ({ contents, allOrders }) => {
 							{orderIds.map((orderId, index) => {
 								const orderDetails = allOrders[orderId];
 								return (
-									<OrderCard 
+									<OrderCard
 										key={orderId}
 										orderDetails={orderDetails} 
 										index={index}
