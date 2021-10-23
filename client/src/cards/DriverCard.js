@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Droppable } from 'react-beautiful-dnd';
 import OrderCard from './OrderCard';
 
-const DriverCard = ({ driverId, driverDetails }) => {
-	const { name, orders } = driverDetails;
+const DriverCard = ({ driverId, contents, allOrders }) => {
+	const { name, orderIds } = contents;
 
 	return (
 		<Droppable droppableId={driverId}>
@@ -14,11 +14,12 @@ const DriverCard = ({ driverId, driverDetails }) => {
 						{...provided.droppableProps}
 					>
 						{name}
-						{orders.map((order, index) => {
+						{orderIds.map((orderId, index) => {
+							const orderDetails = allOrders[orderId]
 							return (
 								<OrderCard 
-									key={order.orderId} 
-									orderDetails={order} 
+									key={orderId} 
+									orderDetails={orderDetails} 
 									index={index}
 								/>
 							);
