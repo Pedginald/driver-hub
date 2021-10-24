@@ -1,43 +1,78 @@
-import React from 'react';
+import React, { useState } from 'react';
 import UnassignedOrders from './UnassignedOrders';
 import Drivers from './Drivers';
 import { DragDropContext } from 'react-beautiful-dnd';
 
-const MainHub = ({ state, setState }) => {
+const MainHub = ({ allData }) => {
+	const [state, setState] = useState(allData);
 	const { driverTable, orderTable, unassignedOrderTable } = state;
-	
+	console.log(state);
+
 	const handleDragEnd = result => {
-		const { destination, source, draggableId } = result;
+		const { destination, source } = result;
+
+		const zoneLocator = zone => 
+			zone.droppableId === 'unassignedOrderTable' ?
+				unassignedOrderTable :
+				driverTable[zone.droppableId];
+
+		const stateFunction = (dropArea, newOrders, drivers) => 
+			dropArea === 'unassignedOrderTable' ? {
+				[dropArea]: {
+					orderIds: newOrders
+				}
+			} : {
+			driverTable: {
+				...drivers,
+				[dropArea]: {
+					...drivers[dropArea],
+					orderIds: newOrders
+				}
+			}
+		};
 
 		if (!destination) return;
 	
 		if (
-			 destination.droppableId === source.droppableId &&
-			 destination.index === source.index
+			destination.droppableId === source.droppableId &&
+			destination.index === source.index
 		) return;
 
-		const dropArea = state[source.droppableId];
-		const newOrderIds = Array.from(dropArea.orderIds);
-		newOrderIds.splice(source.index, 1);
-		newOrderIds.splice(destination.index, 0, draggableId);
+		const sourceZone = zoneLocator(source);
+
+		const destinationZone = zoneLocator(destination);
+
+		const sourceOrders = [...sourceZone.orderIds];
+		const destinationOrders = source.droppableId !== destination.droppableId ?
+			[...destinationZone.orderIds] :
+			sourceOrders;
+		const [removed] = sourceOrders.splice(source.index, 1);
+		destinationOrders.splice(destination.index, 0, removed);
+		const sourceState = stateFunction(source.droppableId, sourceOrders, driverTable);
+		const destinationState = stateFunction(destination.droppableId, destinationOrders, driverTable);
 		
-		const newDropArea = {
-			...dropArea,
-			orderIds : newOrderIds
+		const newState = source.droppableId !== destination.droppableId ? {
+			...state,
+			...sourceState,
+			...destinationState
+		} : {
+			...state,
+			...sourceState,
 		};
 
+		setState(newState);
 	};
 
 	return (
 		<div className='container-fluid mt-4'>
 			<div className='row'>
-				<DragDropContext onDragEnd={(result) => handleDragEnd(result)}>
+				<DragDropContext onDragEnd={handleDragEnd}>
 					<UnassignedOrders 
-						contents={unassignedOrderTable}
+						orderList={unassignedOrderTable}
 						allOrders={orderTable}
 					/>
 					<Drivers 
-						drivers={driverTable}
+						contents={driverTable}
 						allOrders={orderTable}
 					/>
 				</DragDropContext>
