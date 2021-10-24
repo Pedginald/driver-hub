@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import UnassignedOrders from './UnassignedOrders';
 import Drivers from './Drivers';
 import { DragDropContext } from 'react-beautiful-dnd';
+import { stateFunction } from '../functions/functions';
 
 const MainHub = ({ allData }) => {
 	const [state, setState] = useState(allData);
@@ -15,21 +16,6 @@ const MainHub = ({ allData }) => {
 			zone.droppableId === 'unassignedOrderTable' ?
 				unassignedOrderTable :
 				driverTable[zone.droppableId];
-
-		const stateFunction = (dropArea, newOrders, drivers) => 
-			dropArea === 'unassignedOrderTable' ? {
-				[dropArea]: {
-					orderIds: newOrders
-				}
-			} : {
-			driverTable: {
-				...drivers,
-				[dropArea]: {
-					...drivers[dropArea],
-					orderIds: newOrders
-				}
-			}
-		};
 
 		if (!destination) return;
 	
