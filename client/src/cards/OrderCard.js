@@ -4,19 +4,18 @@ import { GiSave } from 'react-icons/gi';
 import { ImPencil2 } from 'react-icons/im'
 
 const OrderCard = ({ orderDetails, index, status }) => {
-	const { orderId, description, revenue, cost } = orderDetails;
+	const { orderId, location, revenue, cost } = orderDetails;
 	const [isAssigned] = useState(status);
 	const [isEditing, setIsEditing] = useState(false);
+	const [orderRevenue, setOrderRevenue] = useState()
 
 	const handleChange = () => {
 		
 	}
 
-	const handleClick = (orderId) => {
+	const handleClick = () => {
 		setIsEditing(!isEditing);
-	}
-
-	console.log(isEditing);
+	};
 
 	return (
 		<Draggable 
@@ -31,14 +30,14 @@ const OrderCard = ({ orderDetails, index, status }) => {
 						{...provided.dragHandleProps}
 						ref={provided.innerRef}
 					>	
-						<p>{description}</p>
+						<p>{location}</p>
 						{isEditing ?
 							<>
-								<input onChange={handleChange}></input>
-								<input onChange={handleChange}></input>
+								<input onChange={handleChange} placeholder={revenue}></input>
+								<input onChange={handleChange} placeholder={cost}></input>
 								{isAssigned ?
 									undefined :
-									<button onClick={() => handleClick(orderId)}>
+									<button onClick={handleClick}>
 										<GiSave />
 									</button>
 								}
