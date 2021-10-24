@@ -22,6 +22,7 @@ const UnassignedOrders = ({ orderList, allOrders }) => {
 										key={orderId}
 										orderDetails={orderDetails} 
 										index={index}
+										status={false}
 									/>
 								);
 							})}
