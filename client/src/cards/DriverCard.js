@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Droppable } from 'react-beautiful-dnd';
 import OrderCard from './OrderCard';
 
@@ -21,6 +21,7 @@ const DriverCard = ({ driverId, contents, allOrders }) => {
 									key={orderId} 
 									orderDetails={orderDetails} 
 									index={index}
+									status={true}
 								/>
 							);
 						})}
